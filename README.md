@@ -2,7 +2,7 @@
 
 ArenaConnect is a production-grade, monolithic sports tournament management platform designed to simplify event publishing, discovery, and profile management. Built using a robust backend pipeline, it serves dynamic roles for both tournament **Organizers** and **Players** via a responsive interface.
 
-🌐 **Live Application:** [https://onrender.com](https://onrender.com)
+🌐 **Live Application:** arenaconnect.onrender.com/
 
 ---
 
