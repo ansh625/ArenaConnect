@@ -2,7 +2,7 @@
 
 ArenaConnect is a production-grade, monolithic sports tournament management platform designed to simplify event publishing, discovery, and profile management. Built using a robust backend pipeline, it serves dynamic roles for both tournament **Organizers** and **Players** via a responsive interface.
 
-🌐 **Live Application:** [arenaconnect.onrender.com](https://onrender.com)
+🌐 **Live Application:** [arenaconnect.onrender.com](https://arenaconnect.onrender.com/)
 
 ---
 
@@ -131,8 +131,8 @@ CREATE TABLE organizers (
 ## 👩‍💻 Author
 **Anshpreet Kaur**
 *   **Role:** Full Stack Developer (MERN / PERN Stack Engineer)
-*   **LinkedIn:** [linkedin.com/in/anshpreet-k](https://linkedin.com)
-*   **GitHub:** [github.com/ansh625](https://github.com)
+*   **LinkedIn:** [linkedin.com/in/anshpreet-k](https://linkedin.com/in/anshpreet-k)
+*   **GitHub:** [github.com/ansh625](https://github.com/ansh625)
 
 ---
 License: This project is open-source and licensed under the MIT License.
