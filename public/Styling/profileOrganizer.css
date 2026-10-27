@@ -1,0 +1,102 @@
+/* Background */
+body {
+  background: linear-gradient(135deg, #f9f9f9, #e9ecef);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  margin-top: 90px; /* space for fixed navbar */
+  transition: transform 0.3s ease;
+}
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Gradient Heading */
+h2 {
+  font-weight: bold;
+  background: linear-gradient(45deg, #343a40, #007bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+}
+
+/* Form Labels */
+.form-label {
+  font-weight: 600;
+  color: #343a40;
+}
+
+/* Image Preview */
+img#frame {
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 2px solid #dee2e6;
+  object-fit: cover;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(45deg, #343a40, #007bff);
+}
+.navbar-brand {
+  font-size: 1.4rem;
+  color: #fff !important;
+}
+.nav-link {
+  color: #e9ecef !important;
+  transition: 0.3s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(45deg, #343a40, #007bff);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+/* Buttons */
+.btn-custom {
+  border-radius: 25px;
+  width: 120px;
+  transition: 0.3s;
+}
+.btn-custom:hover {
+  transform: scale(1.05);
+}
+.btn-gradient {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+.btn-gradient:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Inputs & Textareas */
+.form-control, .form-select {
+  border-radius: 8px;
+  box-shadow: none !important;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}

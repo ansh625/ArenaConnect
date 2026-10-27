@@ -1,0 +1,80 @@
+
+/* Make footer stick to bottom */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* Push footer down */
+}
+
+
+body {
+  background: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Gradient heading for welcome */
+.gradient-text {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Dashboard container */
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+/* Cards */
+.card {
+  width: 18rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card img {
+  height: 290px;
+  object-fit: cover;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(45deg, #343a40, #007bff);
+}
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.btn-gradient:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(45deg, #343a40, #007bff);
+}

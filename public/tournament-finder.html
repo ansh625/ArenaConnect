@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="kuchModule">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Finder</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+  <!-- AngularJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Styling/tournament-finder.css">
+
+  <script>
+
+    // FIXED: Immediate access validation routing
+    if (localStorage.getItem("activeUser") == null) {
+      window.location.href = "/";
+    }
+
+    var module = angular.module("kuchModule", []);
+    module.controller("kuchController", function($scope, $http) {
+
+      $scope.doFetchCities = function() {
+        $http.get("/showCities").then(done, fail);
+        function done(response) { $scope.jsonCity = response.data; }
+        function fail(err) { alert(err.data); }
+      }
+
+      $scope.doFetchGames = function() {
+        $http.get("/showGames").then(done, fail);
+        function done(response) { $scope.jsonAr = response.data; }
+        function fail(err) { alert(err.data); }
+      }
+
+      $scope.doFetchAll = function() {
+        let game = $scope.selGame || "";
+        let city = $scope.selCity || "";
+        let url = "/showRecords?game=" + encodeURIComponent(game) + "&city=" + encodeURIComponent(city);
+        $http.get(url).then(done, fail);
+        function done(response) { 
+          $scope.jsonArray = response.data; 
+          $scope.noResults = !$scope.jsonArray || $scope.jsonArray.length === 0;
+        }
+        function fail(err) { alert("Error loading tournaments: " + err.statusText); }
+      }
+
+      $scope.doFetchOne = function(index) {
+        $scope.selobj = $scope.jsonArray[index];
+      }
+    });
+  </script>
+</head>
+
+<body ng-controller="kuchController" ng-init="doFetchCities(); doFetchGames();" class="d-flex flex-column min-vh-100">
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="DashPlayer.html">
+        <img src="dashboardpics/Ansg.jpg" alt="Logo" width="40" height="40" class="rounded-circle me-2">
+        ArenaConnect
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="DashPlayer.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="tournament-finder.html">Find Tournaments</a></li>
+          <li class="nav-item"><a class="nav-link" href="profilePlayer.html">Profile</a></li>
+          <li class="nav-item">
+            <button class="btn btn-light text-dark ms-2" id="btnLogout">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= PAGE CONTENT ================= -->
+  <div class="container py-5 mt-5 mb-4">
+    <h2 class="text-center mb-4 fw-bold gradient-text">Find Tournaments</h2>
+
+    <!-- Filters -->
+    <!-- Filters -->
+<div class="row mb-4">
+
+  <!-- City Filter -->
+  <div class="col-md-6">
+    <label for="citySelect" class="form-label fw-semibold">
+      Select City
+    </label>
+
+    <select
+      class="form-select"
+      id="citySelect"
+      name="citySelect"
+      ng-model="selCity"
+    >
+      <option disabled selected value="">
+        Select City
+      </option>
+
+      <option
+        ng-repeat="boxObj in jsonCity"
+        value="{{boxObj.city}}"
+      >
+        {{boxObj.city}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Game Filter -->
+  <div class="col-md-6">
+    <label for="gameSelect" class="form-label fw-semibold">
+      Select Game
+    </label>
+
+    <select
+      class="form-select"
+      id="gameSelect"
+      name="gameSelect"
+      ng-model="selGame"
+    >
+      <option disabled selected value="">
+        Select Game
+      </option>
+
+      <option
+        ng-repeat="boxObj in jsonAr"
+        value="{{boxObj.game}}"
+      >
+        {{boxObj.game}}
+      </option>
+    </select>
+  </div>
+
+</div>
+
+    <!-- Show Records Button -->
+    <div class="d-grid gap-2 col-6 mx-auto mb-5">
+      <button class="btn btn-gradient" ng-click="doFetchAll()">Show All Records</button>
+    </div>
+
+    <!-- No Results Alert -->
+    <div class="alert alert-warning text-center" ng-if="noResults">
+      ⚠️ No tournaments found for your selection. Try changing filters.
+    </div>
+
+    <!-- Tournament Cards -->
+    <div class="row g-4">
+      <div class="col-md-4" ng-repeat="boxObj in jsonArray">
+        <div class="card shadow-sm tournament-card" >
+          <img ng-src="{{boxObj.pic}}" class="card-img-top" alt="Tournament Image" >
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{boxObj.title}}</h5>
+            <p class="card-text">
+              <strong>Game:</strong> {{boxObj.game}} <br>
+              <strong>Date:</strong> {{boxObj.date | date:'yyyy-MM-dd'}} <br>
+              <strong>Fee:</strong> ₹{{boxObj.fee}}
+            </p>
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#card-modal" ng-click="doFetchOne($index)">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL ================= -->
+  <div class="modal fade" id="card-modal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="cardModalLabel">Tournament Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img ng-src="{{selobj.pic}}" class="img-fluid rounded mb-3" style="max-height:250px;">
+          <h5 class="mb-2">{{selobj.title}}</h5>
+          <p><strong>Organizer Email:</strong> {{selobj.email}}</p>
+          <p><strong>Game:</strong> {{selobj.game}}</p>
+          <p><strong>Entry Fee:</strong> ₹{{selobj.fee}}</p>
+          <p><strong>Date:</strong> {{selobj.date | date:'yyyy-MM-dd'}}</p>
+          <p><strong>City:</strong> {{selobj.city}}</p>
+          <p><strong>Location:</strong> {{selobj.location}}</p>
+          <p><strong>Prizes:</strong> {{selobj.prize}}</p>
+          <p><strong>Other Info:</strong> {{selobj.info}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-success">Register</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="text-white text-center mt-auto py-3">
+    <p>© 2025 ArenaConnect | All Rights Reserved</p>
+    <p class="mb-1">"Empowering players to find the best tournaments!"</p>
+    <div>
+      <a href="DashPlayer.html" class="text-white me-2">Dashboard</a>
+      <a href="profilePlayer.html" class="text-white me-2">Profile</a>
+      <a href="#" class="text-white">Support</a>
+    </div>
+  </footer>
+
+  <script>
+  $("#btnLogout").click(function() {
+    localStorage.removeItem("activeUser");
+    window.location.href = "/";
+  });
+
+ // Bootstrap modal accessibility fix
+  const modalElement = document.getElementById("card-modal");
+
+  modalElement.addEventListener("hidden.bs.modal", function () {
+
+    // Remove focus from modal buttons
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+
+    // Move focus safely to body
+    document.body.focus();
+  });
+</script>
+
+</body>
+</html>

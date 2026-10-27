@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dash Organizer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Styling/dashOrganizer.css"> <!-- External CSS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center fw-bold" href="index.html">
+        <img src="dashboardpics/Ansg.jpg" alt="Logo" width="40" height="40" class="rounded-circle me-2">
+        ArenaConnect
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item d-flex align-items-center">
+            <span id="activeUser" class="me-2 text-white"></span>
+          <li class="nav-item"><a class="nav-link active" href="DashOrganizer.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="profileOrganizer.html">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="publish-tournaments.html">Post Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="#settingsModal" data-bs-toggle="modal">Settings</a></li>
+          
+            <button class="btn btn-light text-dark ms-2 btnLogout">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= WELCOME SECTION ================= -->
+  <main class="flex-grow-1 pt-5">
+    <div class="container text-center mt-5 pt-4">
+      <h1 class="fw-bold gradient-text">Welcome to Organizer Dashboard</h1>
+      <p class="text-muted fs-5">Manage your profile, create events, and shape the future of sports.</p>
+    </div>
+
+    <!-- ================= DASHBOARD CARDS ================= -->
+    <div class="container my-4">
+      <div class="dashboard-container d-flex flex-wrap justify-content-center gap-4">
+
+        <!-- Profile -->
+        <div class="card">
+          <img src="dashboardpics/ProfilePic.jpg" class="card-img-top" alt="Profile">
+          <div class="card-body text-center">
+            <a href="profileOrganizer.html" class="btn btn-gradient w-100">Profile</a>
+          </div>
+        </div>
+
+        <!-- Post Events -->
+        <div class="card">
+          <img src="dashboardpics/PostEvents.jpg" class="card-img-top" alt="Post Events">
+          <div class="card-body text-center">
+            <a href="publish-tournaments.html" class="btn btn-gradient w-100">Post Events</a>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="card">
+          <img src="dashboardpics/settings1.jpg" class="card-img-top" alt="Settings">
+          <div class="card-body text-center">
+            <button type="button" class="btn btn-gradient w-100" data-bs-toggle="modal" data-bs-target="#settingsModal">
+              Settings
+            </button>
+          </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="card">
+          <img src="dashboardpics/LogOut.jpg" class="card-img-top" alt="Logout">
+          <div class="card-body text-center">
+            <button class="btn btn-danger w-100 btnLogout">Log Out</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= SETTINGS MODAL ================= -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingsModalLabel">Update Settings</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+            <label for="email">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="Password" placeholder="Current Password">
+            <label for="Password">Current Password</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="newPassword" placeholder="New Password">
+            <label for="newPassword">New Password</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-gradient" id="btnUpdate">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="text-white text-center py-3 mt-auto">
+    <p>© 2025 ArenaConnect | All Rights Reserved</p>
+    <p class="mb-1">"Your journey as an organizer shapes the future of sports events!"</p>
+    <div>
+      <a href="publish-tournaments.html" class="text-white me-2">Manage Events</a>
+      <a href="profileOrganizer.html" class="text-white me-2">Profile</a>
+      <a href="#" class="text-white">Support</a>
+    </div>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      // Show active user if available
+      
+      if(localStorage.getItem("activeUser")==null)
+      {
+        location.href="index.html";
+        return;
+      }
+      else{
+        // alert(localStorage.getItem("activeUser"));
+        $("#activeUser").html(localStorage.getItem("activeUser"));
+        $("#activeUser").text("Welcome " + localStorage.getItem("activeUser"));
+      }
+
+      // Update button
+      $("#btnUpdate").click(function () {
+        let email = $("#email").val();
+        let pwd = $("#Password").val();
+        let newpwd = $("#newPassword").val();
+
+        $.ajax({
+          type: "POST",
+          url: "/settings-update",
+          data: { email: email, Password: pwd, newPassword: newpwd }
+        })
+          .done(function (response) {
+            alert(response);
+          })
+          .fail(function () {
+            alert("Error while updating password");
+          });
+      });
+      
+
+      // Logout buttons (both navbar + card)
+      $(".btnLogout").click(function () {
+        localStorage.removeItem("activeUser");
+        location.href = "index.html";
+      });
+
+    });
+  </script>
+</body>
+
+</html>

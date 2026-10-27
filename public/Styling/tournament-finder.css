@@ -1,0 +1,70 @@
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2.gradient-text {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar {
+  background: linear-gradient(45deg, #28a745, #20c997);
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.btn-gradient {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-gradient:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.tournament-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 480px;   /* 👈 makes the card longer */
+  display: flex;
+  flex-direction: column;
+}
+
+.tournament-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  height: 500px;
+  object-fit: cover;
+  width: 100%;
+}
+
+footer {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: #fff;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

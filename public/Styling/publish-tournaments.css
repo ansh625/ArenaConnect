@@ -1,0 +1,39 @@
+.navbar {
+  background: linear-gradient(45deg, #343a40, #007bff);
+}
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.btn-gradient {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-gradient:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+footer {
+  background: linear-gradient(45deg, #343a40, #007bff);
+  color: #fff;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
